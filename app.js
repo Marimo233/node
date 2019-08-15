@@ -6,7 +6,6 @@ const router=new Router()
 const app=new Koa()
 const bodyParser = require('koa-bodyparser')
 app.use(bodyParser())
-
 //增加返回表单页面的路由
 router.get ('/user', async (ctx,next)=>{
   
@@ -21,9 +20,10 @@ router.post('/user/login',(ctx,next)=>{
   }else{
     ctx.response.body='error'
   }
-  // console.log(ctx.request.body)
 })
 
     app.use(router.routes()).listen(8000,()=>[
       console.log('running')
     ])
+
+
