@@ -5,6 +5,9 @@ const Http=require("http")
 const router=new Router()
 const app=new Koa()
 const bodyParser = require('koa-bodyparser')
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017/Order')
+const UserModule=mongoose.model('User',{name:String,id:number})
 app.use(bodyParser())
 //增加返回表单页面的路由
 router.get ('/user', async (ctx,next)=>{
@@ -15,11 +18,9 @@ router.get ('/user', async (ctx,next)=>{
 
 router.post('/user/login',(ctx,next)=>{
   let {name,password}=ctx.request.body
-  if(name==='a'&&password==='1'){
-    ctx.response.body='hello'
-  }else{
-    ctx.response.body='error'
-  }
+  const User=new UserModule({name,password})
+  const res=await User.save()
+  ctx.response.body=res
 })
 
     app.use(router.routes()).listen(8000,()=>[
