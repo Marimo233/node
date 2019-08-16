@@ -16,7 +16,7 @@ router.get ('/user', async (ctx,next)=>{
   ctx.response.body=data
 })
 
-router.post('/user/login',(ctx,next)=>{
+router.post('/user/login',async (ctx,next)=>{
   let {name,password}=ctx.request.body
   const User=new UserModule({name,password})
   const res=await User.save()
