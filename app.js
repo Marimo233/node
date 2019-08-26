@@ -24,10 +24,10 @@ router.post('/user/login',async (ctx,next)=>{
 })
 //处理提交的种类
 router.post('/submitkind',async (ctx,next)=>{
-  let {breakfast,breakfast}=ctx.request.body
+  let {breakfast,dinner}=ctx.request.body
   // const User=new UserModule({name,password})
   // const res=await User.save()
-  ctx.response.body=res
+  ctx.response.body={breakfast,dinner}
 })
 
     app.use(router.routes()).listen(8000,()=>[
