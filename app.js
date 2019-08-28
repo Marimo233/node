@@ -197,6 +197,23 @@ router.get('/login',async (ctx,next)=>{
     admin:["18328069571","15108294327"].includes(phone)?1:0
   }
 })
+//清空订单
+router.get('/deleteOrders',async (ctx,next)=>{
+  await userModule.remove((err,doc)=>{
+    if(doc.ok===1){
+      ctx.response.body={
+        code:0,
+        data:''
+      }
+    }else{
+      ctx.response.body={
+        code:2,
+        data:''
+      }
+    }
+  })
+  
+})
 app.use(router.routes()).listen(8000,()=>[
       console.log('running')
     ])
